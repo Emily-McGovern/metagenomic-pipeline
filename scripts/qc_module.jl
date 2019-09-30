@@ -75,14 +75,13 @@ for (key, value) in parsed_args
 end
 
 base_files = []
-    for filename in readdir ["input_dir"] 
+    for filename in readdir(parsed_args["input_dir"])
         if endswith(filename, "_1.fastq")
             basefile = SubString(filename, 1, length(filename) - 8)
             push!(base_files, basefile)
         end
     end
     return base_files
-end
 
 for basefile in base_files
     constructed_pbs = replace(output_pbs, "{base_filename}" => basefile)
